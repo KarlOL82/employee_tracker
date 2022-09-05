@@ -102,7 +102,7 @@ const removeEmployee = async () => {
     
     console.log(employeeChoices);
     
-    const employessToDelete = await inquirer.prompt([
+    const employeeToDelete = await inquirer.prompt([
         {
         message: "Which employee would you like to remove?",
         name: "deletedEmployee",
@@ -113,7 +113,7 @@ const removeEmployee = async () => {
 
     await db.query(
         `DELETE FROM employees WHERE id = ?`,
-        employessToDelete.deletedEmployee
+        employeeToDelete.deletedEmployee
     );
     console.log("");
     console.log("Selected employee has been removed.");
