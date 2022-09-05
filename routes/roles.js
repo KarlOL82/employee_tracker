@@ -9,9 +9,9 @@ db.query = utils.promisify(db.query);
 
 const rolesList = async () => {
     const roleData = await db.query(
-        `SELECT id, title, department_id, salary 
+        `SELECT * 
         FROM roles
-        JOIN departments ON roles.department_id = role.id`
+        JOIN departments ON roles.department_id = departments.id`
     );
     return roleData;
 };
@@ -35,7 +35,7 @@ const createRole = async () => {
         value: departments.id
     }));
 
-    console.log(roleChoices);
+    console.log(departmentChoices);
 
     const roleArray = await inquirer.prompt([
 
@@ -43,6 +43,14 @@ const createRole = async () => {
             message: "What is the title of the new role?",
             name: "roleTitle",
             type: "input",
+        },
+        
+        {
+            message: "Which department does the role belong to?",
+            name: "roleDept",
+            type: "list", 
+            choices: departmentChoices,
+
         },
         {
             message: "What is the salary for this role?",
@@ -55,18 +63,11 @@ const createRole = async () => {
                 } return "Please enter a valid number."
             },
         },
-        {
-            message: "Which department does the role belong to?",
-            name: "roleDept",
-            type: "list", 
-            choices: departmentChoices,
-
-        },
     ]);
 
     await db.query(
         `INSERT INTO roles (title, department_id, salary) VALUES (?, ?, ?)`,
-        [roleArray.roleTitle, roleArray.roleSalary, roleArray.roleDept]
+        [roleArray.roleTitle, roleArray.roleDept, roleArray.roleSalary]
         );
 
         console.log("");
@@ -78,7 +79,7 @@ const createRole = async () => {
 const removeRole = async () => {
     let roles = await rolesList();
 
-    let roleChoices = roles.map( roles => ({
+    let roleChoices = roles.map( (roles) => ({
         name: roles.title,
         value: roles.id
     }));
@@ -96,7 +97,8 @@ const removeRole = async () => {
         `DELETE FROM roles WHERE id = ?`,
         roleToDelete.deletedRole
     );
-    console.log("");
+    console.log(roleToDelete);
+    console.log(roleToDelete.deletedRole);
     console.log("Chosen role removed.");
     console.log("");
 }
