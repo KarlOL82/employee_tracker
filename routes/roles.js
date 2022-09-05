@@ -11,7 +11,7 @@ const rolesList = async () => {
     const roleData = await db.query(
         `SELECT * 
         FROM roles
-        JOIN departments ON roles.department_id = departments.id`
+        `
     );
     return roleData;
 };
@@ -78,11 +78,15 @@ const createRole = async () => {
 // Removes an existing role
 const removeRole = async () => {
     let roles = await rolesList();
-
+    // console.log(roles);
     let roleChoices = roles.map( (roles) => ({
+        
         name: roles.title,
-        value: roles.id
+        value: roles.id,
+        
     }));
+    
+    console.log(roleChoices);
     
     const roleToDelete = await inquirer.prompt([
         {
@@ -97,10 +101,10 @@ const removeRole = async () => {
         `DELETE FROM roles WHERE id = ?`,
         roleToDelete.deletedRole
     );
-    console.log(roleToDelete);
-    console.log(roleToDelete.deletedRole);
+    console.log("");
     console.log("Chosen role removed.");
     console.log("");
+    
 }
 
 

@@ -8,7 +8,7 @@ CREATE TABLE departments (
     id INT AUTO_INCREMENT NOT NULL,
     dept_name VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
-    ON DELETE CASCADE
+    -- ON DELETE SET NULL
 );
 
 CREATE TABLE roles (
@@ -19,7 +19,7 @@ CREATE TABLE roles (
     PRIMARY KEY (id),
     FOREIGN KEY fk_department (department_id)
     REFERENCES departments(id)
-    ON DELETE CASCADE
+    ON DELETE SET NULL
 
 );
 
