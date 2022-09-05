@@ -23,7 +23,7 @@ const db = mysql.createConnection(
 
 db.query = utils.promisify(db.query);
 
-createDepartment();
+// createDepartment();
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
