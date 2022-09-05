@@ -2,7 +2,8 @@ const express = require("express");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const utils = require('util');
-const { db } = require("../helpers/connection")
+const { db } = require("../helpers/connection");
+const { type } = require("os");
 
 db.query = utils.promisify(db.query);
 
@@ -13,19 +14,21 @@ const deptList = async () => {
     return deptData;
 };
 
+// Displays all current departments in the console
 const viewDepartments = async () => {
     const deptTable = await deptList();
 
     console.table(deptTable);
 }
 
+// Creates a new department and adds it to the database
 const createDepartment = async () => {
 
-    const departments = await db.query("SELECT * FROM departments");
+    let departments = await db.query("SELECT * FROM departments");
 
     console.table(departments);
 
-    const departmentChoices = departments.map( departments => ({
+    let departmentChoices = departments.map( departments => ({
         name: departments.dept_name,
         value: departments.id
     }));
@@ -52,4 +55,32 @@ const createDepartment = async () => {
         console.log("");
 };
 
-module.exports = { createDepartment, viewDepartments };
+// Removes an existing department
+const removeDepartment = async () => {
+    let departments = await deptList();
+
+    let departmentChoices = departments.map( departments => ({
+        name: departments.dept_name,
+        value: departments.id
+    }));
+    
+    const deptChoice = await inquirer.prompt([
+        {
+        message: "Which department would you like to remove?",
+        name: "deletedDept",
+        type: "list",
+        choices: departmentChoices, 
+        },
+    ]);
+
+    await db.query(
+        `DELETE FROM departments WHERE id = ?`,
+        deptChoice.deletedDept
+    );
+    console.log("");
+    console.log("Chosen department removed.");
+    console.log("");
+}
+
+
+module.exports = { createDepartment, viewDepartments, removeDepartment };
