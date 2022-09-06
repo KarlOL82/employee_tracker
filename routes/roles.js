@@ -108,4 +108,4 @@ const removeRole = async () => {
 }
 
 
-module.exports = { viewRoles, createRole, removeRole };
+module.exports = { viewRoles, createRole, removeRole, rolesList };

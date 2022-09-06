@@ -23,9 +23,9 @@ VALUES  ("CEO", 1, 280000),
         ("AP", 6, 75000);
 
 INSERT INTO employees (last_name, first_name, manager_id, role_id)
-VALUES  ("Gaffer", "Magnus", 1, 1),
+VALUES  ("Gaffer", "Magnus", NULL, 1),
         ("Smith", "Bob", 1, 2),
-        ("Brown", "Kevin", 2, 2),
+        ("Brown", "Kevin", 1, 2),
         ("Johnson", "Ernie", 3,5),
         ("Wells", "Tim", 4, 6);
 

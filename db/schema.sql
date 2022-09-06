@@ -5,10 +5,9 @@ CREATE DATABASE teamDirectory_db;
 USE teamDirectory_db;
 
 CREATE TABLE departments (
-    id INT AUTO_INCREMENT NOT NULL,
-    dept_name VARCHAR(30) NOT NULL,
-    PRIMARY KEY (id)
-    ON DELETE CASCADE
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    dept_name VARCHAR(30) NOT NULL
+    -- ON DELETE SET NULL
 );
 
 CREATE TABLE roles (
@@ -19,7 +18,7 @@ CREATE TABLE roles (
     PRIMARY KEY (id),
     FOREIGN KEY fk_department (department_id)
     REFERENCES departments(id)
-    ON DELETE CASCADE
+    -- ON DELETE SET NULL
 );
 
 CREATE TABLE employees (
@@ -29,12 +28,14 @@ CREATE TABLE employees (
     manager_id INT,
     role_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY fk_role (role_id)
+    CONSTRAINT fk_role
+    FOREIGN KEY (role_id)
     REFERENCES roles(id)
-    ON DELETE SET NULL,
-    FOREIGN KEY fk_manager (manager_id)
-    REFERENCES employees(id)
     ON DELETE CASCADE
+    -- CONSTRAINT fk_manager
+    -- FOREIGN KEY (manager_id)
+    -- REFERENCES employees(id)
+    -- ON DELETE CASCADE
 
 );
 

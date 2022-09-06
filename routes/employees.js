@@ -4,19 +4,26 @@ const inquirer = require("inquirer");
 const utils = require('util');
 const { db } = require("../helpers/connection");
 const { type } = require("os");
-// const {deptList} = require("./departments");
+const {rolesList} = require("./roles");
 db.query = utils.promisify(db.query);
 
+
+
 const employeesList = async () => {
+
+    
+
     const employeeData = await db.query(
-        `SELECT employees.id, last_name, first_name, role_id, manager_id
+        `SELECT employees.id, last_name, first_name, manager_id, role_id, departments.dept_name, roles.title, roles.salary
         FROM employees
-        JOIN roles on employees.role_id = roles.id
-        JOIN departments on department_id = departments.id
+        LEFT JOIN roles on employees.role_id = roles.id
+        LEFT JOIN departments on department_id = departments.id
         `
     );
     return employeeData;
 };
+
+
 
 
 // Displays all current employees in the console
@@ -24,6 +31,7 @@ const viewEmployees = async () => {
     const employeeTable = await employeesList();
 
     console.table(employeeTable);
+    
 }
 
 // Creates a new employee and adds it to the database
@@ -37,9 +45,9 @@ const createEmployee = async () => {
     }));
     console.log(roleChoices);
 
-    const managers = await employeesList();
+    let managers = await employeesList();
 
-    const managerChoices = managers.map((employees) => ({
+    let managerChoices = managers.map((employees) => ({
         name: (`${employees.last_name}, ${employees.first_name}`),
         value: employees.id,
     }));
@@ -84,12 +92,53 @@ const createEmployee = async () => {
         console.log("");
         console.log("New employee added.");
         console.log("");
-        console.table(employeeTable);
+        
+};
+
+const updateRole = async () => {
+    let roles = await db.query("SELECT id, title FROM roles");
+
+    let roleChoices = roles.map( (roles) => ({
+        name: roles.title,
+        value: roles.id
+}));
+
+    const availableEmployees = await employeesList();
+
+    const employeeToUpdate = availableEmployees.map( employees => ({
+        name: (`${employees.last_name} ${employees.first_name}`),
+        value: employees.id,
+    }));
+
+    const updateQuery = await inquirer.prompt([
+        {
+            message:"Which employee would you like to update?",
+            name: "roleChange",
+            type: "list",
+            choices: employeeToUpdate,
+        },
+        {
+            message: "What is this employee's new title?",
+            name: "newRole",
+            type: "list",
+            choices: roleChoices,
+        },
+    ]);
+
+    await db.query(
+        `UPDATE employees
+        SET role_id =?
+        WHERE id = ?`,
+        [updateQuery.newRole, updateQuery.roleChange]
+    );
+
+    console.log("");
+    console.log(`Employee's role updated.`);
+    console.log("");
 };
 
 
-
-// Removes an existing role
+// Removes an existing employee
 const removeEmployee = async () => {
     let employees = await employeesList();
     // console.log(roles);
@@ -122,4 +171,4 @@ const removeEmployee = async () => {
 }
 
 
-module.exports = { viewEmployees, createEmployee, removeEmployee };
+module.exports = { viewEmployees, createEmployee, removeEmployee, updateRole };
