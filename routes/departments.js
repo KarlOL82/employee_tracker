@@ -20,6 +20,7 @@ const viewDepartments = async () => {
     const deptTable = await deptList();
     console.log("\n");
     console.table(deptTable);
+    console.log("Use up or down keys to continue.");
     // await runTracker();
 };
 

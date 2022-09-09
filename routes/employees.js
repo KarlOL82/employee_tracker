@@ -5,6 +5,7 @@ const utils = require('util');
 const { db } = require("../helpers/connection");
 const { type } = require("os");
 const {rolesList} = require("./roles");
+
 db.query = utils.promisify(db.query);
 
 
@@ -32,7 +33,7 @@ const viewEmployees = async () => {
     
     console.log("\n");
     console.table(employeeTable);
-    
+    console.log("Use up or down keys to continue.");
 }
 
 // Creates a new employee and adds it to the database

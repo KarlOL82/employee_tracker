@@ -5,109 +5,104 @@ const inquirer = require("inquirer");
 const utils = require("util");
 
 const {
-    createDepartment,
-    viewDepartments,
-    removeDepartment,
-  } = require("./departments");
-  const { viewRoles, createRole, removeRole } = require("./roles");
-  const {
-    viewEmployees,
-    createEmployee,
-    updateRole,
-    removeEmployee,
-  } = require("./employees");
+  createDepartment,
+  viewDepartments,
+  removeDepartment,
+} = require("./departments");
+const { viewRoles, createRole, removeRole } = require("./roles");
+const {
+  viewEmployees,
+  createEmployee,
+  updateRole,
+  removeEmployee,
+} = require("./employees");
 
-  function runTracker() {
-    inquirer
-      .prompt([
-        {
-          message: "What area would you like to access?",
-          name: "selection",
-          type: "list",
-          choices: [
-            "View Departments",
-            "Add New Department",
-            "Remove Department",
-            "View All Roles",
-            "Add New Role",
-            "Remove Role",
-            "View All Employees",
-            "Add New Employee",
-            "Update Employee Role",
-            "Remove Employee",
-            "Exit Program",
-          ],
-        },
-      ])
-      .then((answer) => {
-        switch (answer.selection) {
-          case "View Departments":         
-            viewDepartments();       
-            console.log("");
-            runTracker();
-            break;
-          case "Add New Department":
-            createDepartment();
-            console.log("");
-            runTracker();
-            break;
-          case "Remove Department":
-            removeDepartment();
-            console.log("");
-            runTracker();
-            break;
-          case "View All Roles":
-            viewRoles();
-            console.log("");
-            runTracker();
-            break;
-          case "Add New Role":
-            createRole();
-            console.log("");
-            runTracker();
-            break;
-          case "Remove Role":
-            removeRole();
-            console.log("");
-            runTracker();
-            break;
-          case "View All Employees":
-            viewEmployees();
-            console.log("");
-            runTracker();
-            break;
-          case "Add New Employee":
-            createEmployee();
-            console.log("");
-            runTracker();
-            break;
-          case "Update Employee Role":
-            updateRole();
-            console.log("");
-            runTracker();
-            break;
-          case "Remove Employee":
-            removeEmployee();
-            console.log("");
-            runTracker();
-            break;
-          default:
-            console.log("Invalid Entry");
-            break;
-            case "Exit Program":
-            console.log("Session Ended");
-            process.exit();
-            // break;
-        }
-      });
-  };
-  
+function runTracker() {
+  inquirer
+    .prompt([
+      {
+        message: "What area would you like to access?",
+        name: "selection",
+        type: "list",
+        choices: [
+          "View Departments",
+          "Add New Department",
+          "Remove Department",
+          "View All Roles",
+          "Add New Role",
+          "Remove Role",
+          "View All Employees",
+          "Add New Employee",
+          "Update Employee Role",
+          "Remove Employee",
+          "Exit Program",
+        ],
+      },
+    ])
+    .then((answer) => {
+      switch (answer.selection) {
+        case "View Departments":
+          viewDepartments();
+          console.log("");
+          runTracker();
+          break;
+        case "Add New Department":
+          createDepartment();
+          console.log("");
+          runTracker();
+          break;
+        case "Remove Department":
+          removeDepartment();
+          console.log("");
+          runTracker();
+          break;
+        case "View All Roles":
+          viewRoles();
+          console.log("");
+          runTracker();
+          break;
+        case "Add New Role":
+          createRole();
+          console.log("");
+          runTracker();
+          break;
+        case "Remove Role":
+          removeRole();
+          console.log("");
+          runTracker();
+          break;
+        case "View All Employees":
+          viewEmployees();
+          console.log("");
+          runTracker();
+          break;
+        case "Add New Employee":
+          createEmployee();
+          console.log("");
+          runTracker();
+          break;
+        case "Update Employee Role":
+          updateRole();
+          console.log("");
+          runTracker();
+          break;
+        case "Remove Employee":
+          removeEmployee();
+          console.log("");
+          runTracker();
+          break;
+        default:
+          console.log("Invalid Entry");
+          break;
+        case "Exit Program":
+          console.log("Session Ended");
+          process.exit();
+        // break;
+      }
+    });
+}
 
-
-
-module.exports = {runTracker};
-
-
+module.exports = { runTracker };
 
 // const topMenuQs = [
 //     {
@@ -193,4 +188,3 @@ module.exports = {runTracker};
 // ];
 
 // module.exports = {topMenuQs, departmentOptions, roleOptions, employeeOptions }
-

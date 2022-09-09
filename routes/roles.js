@@ -21,6 +21,7 @@ const viewRoles = async () => {
     const roleTable = await rolesList();
     console.log("\n");
     console.table(roleTable);
+    console.log("Use up or down keys to continue.");
 }
 
 // Creates a new role and adds it to the database
@@ -75,6 +76,7 @@ const createRole = async () => {
         console.log("");
         // viewRoles();
 };
+
 
 // Removes an existing role
 const removeRole = async () => {
