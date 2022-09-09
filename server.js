@@ -4,6 +4,20 @@ const inquirer = require("inquirer");
 // const connection = require("../employee_tracker/helpers/connectipn")
 const utils = require("util");
 
+const {runTracker} = require("../employee_tracker/routes/question");
+
+const PORT = process.env.PORT || 3001;
+const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+runTracker();
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 // const {
 //   createDepartment,
 //   viewDepartments,
@@ -29,15 +43,7 @@ const utils = require("util");
 //   employeeOptions,
 //
 
-const {runTracker} = require("../employee_tracker/routes/question");
 
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-runTracker();
 
 // async function runTracker() {
 
@@ -127,7 +133,5 @@ runTracker();
 
 
 
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
+
 
