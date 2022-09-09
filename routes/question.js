@@ -31,7 +31,7 @@ const {
             "View All Roles",
             "Add New Role",
             "Remove Role",
-            "View All Emoloyees",
+            "View All Employees",
             "Add New Employee",
             "Update Employee Role",
             "Remove Employee",
@@ -41,8 +41,7 @@ const {
       ])
       .then((answer) => {
         switch (answer.selection) {
-          case "View Departments":
-            
+          case "View Departments":         
             viewDepartments();       
             console.log("");
             runTracker();
@@ -54,43 +53,51 @@ const {
             break;
           case "Remove Department":
             removeDepartment();
+            console.log("");
             runTracker();
             break;
           case "View All Roles":
             viewRoles();
+            console.log("");
             runTracker();
             break;
           case "Add New Role":
             createRole();
+            console.log("");
             runTracker();
             break;
           case "Remove Role":
             removeRole();
+            console.log("");
             runTracker();
             break;
-          case "View All Emoloyees":
+          case "View All Employees":
             viewEmployees();
+            console.log("");
             runTracker();
             break;
           case "Add New Employee":
             createEmployee();
+            console.log("");
             runTracker();
             break;
           case "Update Employee Role":
             updateRole();
+            console.log("");
             runTracker();
             break;
           case "Remove Employee":
             removeEmployee();
+            console.log("");
             runTracker();
-            break;
-          case "Exit Program":
-            process.exit();
-            console.log("Session Ended");
             break;
           default:
             console.log("Invalid Entry");
             break;
+            case "Exit Program":
+            console.log("Session Ended");
+            process.exit();
+            // break;
         }
       });
   };

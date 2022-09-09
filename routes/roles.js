@@ -19,7 +19,7 @@ const rolesList = async () => {
 // Displays all current roles in the console
 const viewRoles = async () => {
     const roleTable = await rolesList();
-
+    console.log("\n");
     console.table(roleTable);
 }
 
@@ -35,7 +35,7 @@ const createRole = async () => {
         value: departments.id
     }));
 
-    console.log(departmentChoices);
+    
 
     const roleArray = await inquirer.prompt([
 
@@ -73,6 +73,7 @@ const createRole = async () => {
         console.log("");
         console.log("New role added.");
         console.log("");
+        // viewRoles();
 };
 
 // Removes an existing role
@@ -86,7 +87,7 @@ const removeRole = async () => {
         
     }));
     
-    console.log(roleChoices);
+    
     
     const roleToDelete = await inquirer.prompt([
         {
@@ -104,6 +105,7 @@ const removeRole = async () => {
     console.log("");
     console.log("Chosen role removed.");
     console.log("");
+    // viewRoles();
     
 }
 

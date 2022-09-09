@@ -21,7 +21,7 @@ const viewDepartments = async () => {
     console.log("\n");
     console.table(deptTable);
     // await runTracker();
-}
+};
 
 // Creates a new department and adds it to the database
 const createDepartment = async () => {
@@ -31,12 +31,12 @@ const createDepartment = async () => {
     console.log("\n");
     console.table(departments);
 
-    let departmentChoices = departments.map( departments => ({
-        name: departments.dept_name,
-        value: departments.id
-    }));
+    // let departmentChoices = departments.map( departments => ({
+    //     name: departments.dept_name,
+    //     value: departments.id
+    // };
 
-    console.log(departmentChoices);
+    
 
     const answers = await inquirer.prompt([
 
@@ -56,7 +56,7 @@ const createDepartment = async () => {
         console.log("");
         console.log("New department added.");
         console.log("");
-        viewDepartments();
+        // viewDepartments();
 };
 
 // Removes an existing department
@@ -84,6 +84,7 @@ const removeDepartment = async () => {
     console.log("");
     console.log("Chosen department removed.");
     console.log("");
+    // viewDepartments();
 }
 
 

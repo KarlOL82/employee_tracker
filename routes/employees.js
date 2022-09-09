@@ -29,7 +29,8 @@ const employeesList = async () => {
 // Displays all current employees in the console
 const viewEmployees = async () => {
     const employeeTable = await employeesList();
-
+    
+    console.log("\n");
     console.table(employeeTable);
     
 }
@@ -43,7 +44,7 @@ const createEmployee = async () => {
         name: roles.title,
         value: roles.id
     }));
-    console.log(roleChoices);
+    
 
     let managers = await employeesList();
 
@@ -52,7 +53,7 @@ const createEmployee = async () => {
         value: employees.id,
     }));
 
-    console.log(managerChoices);
+    
 
     
 
@@ -92,6 +93,7 @@ const createEmployee = async () => {
         console.log("");
         console.log("New employee added.");
         console.log("");
+        // viewEmployees();
         
 };
 
@@ -135,6 +137,7 @@ const updateRole = async () => {
     console.log("");
     console.log(`Employee's role updated.`);
     console.log("");
+    // viewEmployees();
 };
 
 
@@ -149,7 +152,7 @@ const removeEmployee = async () => {
         
     }));
     
-    console.log(employeeChoices);
+    
     
     const employeeToDelete = await inquirer.prompt([
         {
@@ -167,6 +170,7 @@ const removeEmployee = async () => {
     console.log("");
     console.log("Selected employee has been removed.");
     console.log("");
+    // viewEmployees();
     
 }
 
