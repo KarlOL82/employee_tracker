@@ -4,6 +4,7 @@ const inquirer = require("inquirer");
 const utils = require('util');
 const { db } = require("../helpers/connection");
 const { type } = require("os");
+const {runTracker} = require("./question");
 
 db.query = utils.promisify(db.query);
 
@@ -17,8 +18,9 @@ const deptList = async () => {
 // Displays all current departments in the console
 const viewDepartments = async () => {
     const deptTable = await deptList();
-
+    console.log("\n");
     console.table(deptTable);
+    // await runTracker();
 }
 
 // Creates a new department and adds it to the database
@@ -26,6 +28,7 @@ const createDepartment = async () => {
 
     let departments = await db.query("SELECT * FROM departments");
 
+    console.log("\n");
     console.table(departments);
 
     let departmentChoices = departments.map( departments => ({
@@ -53,6 +56,7 @@ const createDepartment = async () => {
         console.log("");
         console.log("New department added.");
         console.log("");
+        viewDepartments();
 };
 
 // Removes an existing department
