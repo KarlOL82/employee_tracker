@@ -49,7 +49,7 @@ function runTracker() {
         case "Add New Department":
           createDepartment();
           console.log("");
-          runTracker();
+          // runTracker();
           break;
         case "Remove Department":
           removeDepartment();

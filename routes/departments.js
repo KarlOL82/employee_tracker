@@ -58,6 +58,7 @@ const createDepartment = async () => {
         console.log("New department added.");
         console.log("");
         // viewDepartments();
+        await runTracker();
 };
 
 // Removes an existing department
