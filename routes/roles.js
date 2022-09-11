@@ -5,8 +5,8 @@ const utils = require('util');
 const { db } = require("../helpers/connection");
 const { type } = require("os");
 // const {runTracker} = require("./question")
-const {askAgainRoles} = require("../helpers/askAgain");
-
+const {askAgain} = require("../helpers/askAgain");
+const { runTracker } = require("./question")
 // const {
 //     createDepartment,
 //     viewDepartments,
@@ -22,90 +22,7 @@ const {askAgainRoles} = require("../helpers/askAgain");
 
   db.query = utils.promisify(db.query);
 
-// function askAgainRoles() {
-//     inquirer
-//       .prompt([
-//         {
-//           message: "What area would you like to access?",
-//           name: "selection",
-//           type: "list",
-//           choices: [
-//             "View Departments",
-//             "Add New Department",
-//             "Remove Department",
-//             "View All Roles",
-//             "Add New Role",
-//             "Remove Role",
-//             "View All Employees",
-//             "Add New Employee",
-//             "Update Employee Role",
-//             "Remove Employee",
-//             "Exit Program",
-//           ],
-//         },
-//       ])
-//       .then((answer) => {
-//         switch (answer.selection) {
-//           case "View Departments":
-//             viewDepartments();
-//             console.log("");
-            
-//             break;
-//           case "Add New Department":
-//             createDepartment();
-//             console.log("");
-            
-//             break;
-//           case "Remove Department":
-//             removeDepartment();
-//             console.log("");
-            
-//             break;
-//           case "View All Roles":
-//             viewRoles();
-//             console.log("");
-            
-//             break;
-//           case "Add New Role":
-//             createRole();
-//             console.log("");
-            
-//             break;
-//           case "Remove Role":
-//             removeRole();
-//             console.log("");
-            
-//             break;
-//           case "View All Employees":
-//             viewEmployees();
-//             console.log("");
-//             ;
-//             break;
-//           case "Add New Employee":
-//             createEmployee();
-//             console.log("");
-            
-//             break;
-//           case "Update Employee Role":
-//             updateRole();
-//             console.log("");
-            
-//             break;
-//           case "Remove Employee":
-//             removeEmployee();
-//             console.log("");
-            
-//             break;
-//           default:
-//             console.log("Invalid Entry");
-//             break;
-//           case "Exit Program":
-//             console.log("Session Ended");
-//             process.exit();
-          
-//         }
-//       });
-//   }
+
 
 const rolesList = async () => {
     const roleData = await db.query(
@@ -122,7 +39,7 @@ const viewRoles = async () => {
     console.log("\n");
     console.table(roleTable);
     console.log("Use up or down keys to continue.");
-    askAgainRoles();
+    // askAgain();
 };
 
 // Creates a new role and adds it to the database
@@ -173,7 +90,7 @@ const createRole = async () => {
         console.log("");
         console.log("New role added.");
         console.log("");
-        askAgainRoles();
+        // askAgain();
 };
 
 
@@ -206,7 +123,7 @@ const removeRole = async () => {
     console.log("");
     console.log("Chosen role removed.");
     console.log("");
-    askAgainRoles();
+    // askAgain();
     
 }
 

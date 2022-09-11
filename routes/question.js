@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const { db } = require("../helpers/connection");
 const utils = require("util");
+const {askAgain} =require("../helpers/askAgain")
 
 const {
   createDepartment,
@@ -23,7 +24,8 @@ const {
   removeEmployee,
 } = require("./employees");
 
-const runTracker = async () => {
+
+function runTracker() {
   inquirer
     .prompt([
       {
@@ -45,7 +47,7 @@ const runTracker = async () => {
         ],
       },
     ])
-    await((answer) => {
+    .then((answer) => {
       switch (answer.selection) {
         case "View Departments":
           viewDepartments();
@@ -104,8 +106,10 @@ const runTracker = async () => {
           console.log("Session Ended");
           process.exit();
         
-      }
-    });
+      };
+      askAgain();
+    }); 
+    
 };
 
 
