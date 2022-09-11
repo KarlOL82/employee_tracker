@@ -4,8 +4,108 @@ const inquirer = require("inquirer");
 const utils = require('util');
 const { db } = require("../helpers/connection");
 const { type } = require("os");
-// const {createDepartment, viewDepartments, removeDepartment} = require("./departments");
-db.query = utils.promisify(db.query);
+// const {runTracker} = require("./question")
+const {askAgainRoles} = require("../helpers/askAgain");
+
+// const {
+//     createDepartment,
+//     viewDepartments,
+//     removeDepartment,
+//   } = require("./departments");
+
+//   const {
+//     viewEmployees,
+//     createEmployee,
+//     updateRole,
+//     removeEmployee,
+//   } = require("./employees");
+
+  db.query = utils.promisify(db.query);
+
+// function askAgainRoles() {
+//     inquirer
+//       .prompt([
+//         {
+//           message: "What area would you like to access?",
+//           name: "selection",
+//           type: "list",
+//           choices: [
+//             "View Departments",
+//             "Add New Department",
+//             "Remove Department",
+//             "View All Roles",
+//             "Add New Role",
+//             "Remove Role",
+//             "View All Employees",
+//             "Add New Employee",
+//             "Update Employee Role",
+//             "Remove Employee",
+//             "Exit Program",
+//           ],
+//         },
+//       ])
+//       .then((answer) => {
+//         switch (answer.selection) {
+//           case "View Departments":
+//             viewDepartments();
+//             console.log("");
+            
+//             break;
+//           case "Add New Department":
+//             createDepartment();
+//             console.log("");
+            
+//             break;
+//           case "Remove Department":
+//             removeDepartment();
+//             console.log("");
+            
+//             break;
+//           case "View All Roles":
+//             viewRoles();
+//             console.log("");
+            
+//             break;
+//           case "Add New Role":
+//             createRole();
+//             console.log("");
+            
+//             break;
+//           case "Remove Role":
+//             removeRole();
+//             console.log("");
+            
+//             break;
+//           case "View All Employees":
+//             viewEmployees();
+//             console.log("");
+//             ;
+//             break;
+//           case "Add New Employee":
+//             createEmployee();
+//             console.log("");
+            
+//             break;
+//           case "Update Employee Role":
+//             updateRole();
+//             console.log("");
+            
+//             break;
+//           case "Remove Employee":
+//             removeEmployee();
+//             console.log("");
+            
+//             break;
+//           default:
+//             console.log("Invalid Entry");
+//             break;
+//           case "Exit Program":
+//             console.log("Session Ended");
+//             process.exit();
+          
+//         }
+//       });
+//   }
 
 const rolesList = async () => {
     const roleData = await db.query(
@@ -22,14 +122,13 @@ const viewRoles = async () => {
     console.log("\n");
     console.table(roleTable);
     console.log("Use up or down keys to continue.");
-}
+    askAgainRoles();
+};
 
 // Creates a new role and adds it to the database
 const createRole = async () => {
 
     let departments = await db.query("SELECT id, dept_name FROM departments");
-
-    // console.table(roles);
 
     let departmentChoices = departments.map( departments => ({
         name: departments.dept_name,
@@ -74,14 +173,14 @@ const createRole = async () => {
         console.log("");
         console.log("New role added.");
         console.log("");
-        // viewRoles();
+        askAgainRoles();
 };
 
 
 // Removes an existing role
 const removeRole = async () => {
     let roles = await rolesList();
-    // console.log(roles);
+    
     let roleChoices = roles.map( (roles) => ({
         
         name: roles.title,
@@ -107,7 +206,7 @@ const removeRole = async () => {
     console.log("");
     console.log("Chosen role removed.");
     console.log("");
-    // viewRoles();
+    askAgainRoles();
     
 }
 

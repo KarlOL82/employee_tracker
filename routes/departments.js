@@ -4,9 +4,110 @@ const inquirer = require("inquirer");
 const utils = require('util');
 const { db } = require("../helpers/connection");
 const { type } = require("os");
-const {runTracker} = require("./question");
+const {askAgain} = require("../helpers/askAgain");
+
+// const { 
+//     viewRoles, 
+//     createRole, 
+//     removeRole 
+//   } = require("./roles");
+
+  
+//   const {
+//     viewEmployees,
+//     createEmployee,
+//     updateRole,
+//     removeEmployee,
+//   } = require("./employees");
 
 db.query = utils.promisify(db.query);
+
+
+
+// function askAgain() {
+//     inquirer
+//       .prompt([
+//         {
+//           message: "What area would you like to access?",
+//           name: "selection",
+//           type: "list",
+//           choices: [
+//             "View Departments",
+//             "Add New Department",
+//             "Remove Department",
+//             "View All Roles",
+//             "Add New Role",
+//             "Remove Role",
+//             "View All Employees",
+//             "Add New Employee",
+//             "Update Employee Role",
+//             "Remove Employee",
+//             "Exit Program",
+//           ],
+//         },
+//       ])
+//       .then((answer) => {
+//         switch (answer.selection) {
+//           case "View Departments":
+//             viewDepartments();
+//             console.log("");
+            
+//             break;
+//           case "Add New Department":
+//             createDepartment();
+//             console.log("");
+            
+//             break;
+//           case "Remove Department":
+//             removeDepartment();
+//             console.log("");
+           
+//             break;
+//           case "View All Roles":
+//             viewRoles();
+//             console.log("");
+            
+//             break;
+//           case "Add New Role":
+//             createRole();
+//             console.log("");
+            
+//             break;
+//           case "Remove Role":
+//             removeRole();
+//             console.log("");
+            
+//             break;
+//           case "View All Employees":
+//             viewEmployees();
+//             console.log("");
+            
+//             break;
+//           case "Add New Employee":
+//             createEmployee();
+//             console.log("");
+            
+//             break;
+//           case "Update Employee Role":
+//             updateRole();
+//             console.log("");
+            
+//             break;
+//           case "Remove Employee":
+//             removeEmployee();
+//             console.log("");
+            
+//             break;
+//           default:
+//             console.log("Invalid Entry");
+//             break;
+//           case "Exit Program":
+//             console.log("Session Ended");
+//             process.exit();
+          
+//         }
+//       });
+//   };
 
 const deptList = async () => {
     const deptData = await db.query(
@@ -21,7 +122,7 @@ const viewDepartments = async () => {
     console.log("\n");
     console.table(deptTable);
     console.log("Use up or down keys to continue.");
-    // await runTracker();
+    askAgain();
 };
 
 // Creates a new department and adds it to the database
@@ -49,17 +150,21 @@ const createDepartment = async () => {
         },
     ]);
 
-    await db.query(
+        db.query(
         `INSERT INTO departments (dept_name) VALUES (?)`,
         answers.deptName
         );
-
+        
         console.log("");
         console.log("New department added.");
         console.log("");
+        askAgain();
+
         // viewDepartments();
-        await runTracker();
+        //runTracker();
 };
+
+
 
 // Removes an existing department
 const removeDepartment = async () => {
@@ -86,8 +191,9 @@ const removeDepartment = async () => {
     console.log("");
     console.log("Chosen department removed.");
     console.log("");
+    askAgain();
     // viewDepartments();
 }
 
 
-module.exports = { createDepartment, viewDepartments, removeDepartment };
+module.exports = { createDepartment, viewDepartments, removeDepartment, askAgain };
