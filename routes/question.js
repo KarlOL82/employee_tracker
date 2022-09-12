@@ -7,6 +7,7 @@ const utils = require("util");
 
 db.query = utils.promisify(db.query);
 
+// Had to run an identical function with different name to avoid circular dependency
 function askAgain() {
   inquirer
     .prompt([
@@ -92,6 +93,7 @@ function askAgain() {
     }); 
 };
 
+// Pulls departments from sql database
 const deptList = async () => {
     const deptData = await db.query(
         `SELECT id, dept_name FROM departments`
@@ -172,6 +174,7 @@ const removeDepartment = async () => {
     
 };
 
+// pulls data from the roles table
 const rolesList = async () => {
   const roleData = await db.query(
       `SELECT * 
@@ -277,6 +280,7 @@ const removeRole = async () => {
   
 };
 
+// Pulls data from the employees table
 const employeesList = async () => {
 
     
@@ -364,6 +368,7 @@ const createEmployee = async () => {
       
 };
 
+// Allows the user to assign a new role to any existing employee
 const updateRole = async () => {
   let roles = await db.query("SELECT id, title FROM roles");
 
@@ -443,6 +448,7 @@ const removeEmployee = async () => {
   
 };
 
+// Exports all functions from the various tables to be used in the main function call
 module.exports = {
   createDepartment,
   viewDepartments,

@@ -6,7 +6,7 @@ const utils = require("util");
 const { db } = require("../employee_tracker/helpers/connection");
 
 
-
+//required functions from each table in the database
 const {
   createDepartment,
   viewDepartments,
@@ -33,6 +33,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Main function that initializes the app
 function runTracker() {
   inquirer
     .prompt([
