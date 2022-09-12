@@ -26,7 +26,8 @@ To run this application, simply navigate to the root directory and run the serve
 
   This application is using the MIT license.  
 
-## Photos  
+## Photos and Media  
+[Video Walkthrough Demo](https://www.youtube.com/watch?v=z3zrnxyoKpA) 
 
 ![Main Menu](./assets/mainMenu.png "Main Menu")  
 
@@ -36,7 +37,7 @@ To run this application, simply navigate to the root directory and run the serve
 
 ![Employee Table](./assets/employee%20table.png "Employee Table")  
 
-[Video Demo](https://www.youtube.com/watch?v=z3zrnxyoKpA)
+
 
 
 
