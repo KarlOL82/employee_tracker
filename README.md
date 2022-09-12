@@ -29,6 +29,7 @@ To run this application, simply navigate to the root directory and run the serve
 ## Photos and Media  
 [Video Walkthrough Demo](https://www.youtube.com/watch?v=z3zrnxyoKpA) 
 
+
 ![Main Menu](./assets/mainMenu.png "Main Menu")  
 
 ![Department Table](./assets/deptTable.png "Department Table")  
