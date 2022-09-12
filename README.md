@@ -36,6 +36,8 @@ To run this application, simply navigate to the root directory and run the serve
 
 ![Employee Table](./assets/employee%20table.png "Employee Table")  
 
+[Video Demo](https://drive.google.com/file/d/1i2CDgMBxd0pCHYBWwSK4naO11QSPxUeR/preview)
+
 
 
 
