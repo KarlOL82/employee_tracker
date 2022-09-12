@@ -7,7 +7,7 @@ USE teamDirectory_db;
 CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     dept_name VARCHAR(30) NOT NULL
-    -- ON DELETE SET NULL
+    
 );
 
 CREATE TABLE roles (
